@@ -139,17 +139,57 @@ void Arbol::eliminar (int x) {
 }
 
 void Arbol::rellenarArbol (string f) {
-	// COMPLETAR
+	ifstream s;
+	int num;
+	s.open(f.c_str());
+	while (!s.eof()) {
+		s >> num;
+		insertar(num);
+	}
 }
 
 
-int Arbol::sumaClavesImparesDosHijos () {
+int Arbol::sumaClavesImparesDosHijos (pNodoArbol p) {
 	int resul = 0;
-	// COMPLETAR
+	if (p == NULL){
+		if (raiz != NULL){
+			p = raiz;
+		}
+		else {
+			return 0;
+		}
+	}
+	if (p->iz != NULL)
+		resul += sumaClavesImparesDosHijos(p->iz);
+	if (p->de != NULL)
+		resul += sumaClavesImparesDosHijos(p->de);
+	if (p->clave % 2 == 1 && p->iz != NULL && p->de != NULL)
+		resul += p->clave;
 	return resul;
 }
 
 
-void Arbol::mostrarClavesUnHijo () {
-	// COMPLETAR
+void Arbol::mostrarClavesUnHijo (pNodoArbol p) {
+	int hijos = 0;
+	if (p == NULL){
+		if (raiz != NULL){
+			p = raiz;
+		}
+		else {
+			return;
+		}
+	}
+	if (p->de != NULL){
+		mostrarClavesUnHijo(p->de);
+	}
+	if (p->de != NULL)
+		hijos++;
+	if (p->iz != NULL)
+		hijos++;
+	if (hijos == 1){
+		cout << p->clave << endl;
+	}
+	if (p->iz != NULL){
+		mostrarClavesUnHijo(p->iz);
+	}
 }
