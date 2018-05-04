@@ -149,47 +149,45 @@ void Arbol::rellenarArbol (string f) {
 }
 
 
-int Arbol::sumaClavesImparesDosHijos (pNodoArbol p) {
+int Arbol::sumaClavesImparesDosHijos () {
 	int resul = 0;
-	if (p == NULL){
-		if (raiz != NULL){
-			p = raiz;
-		}
-		else {
-			return 0;
-		}
+	pNodoArbol aux;
+	aux = raiz;
+	if (raiz->iz != NULL){
+		raiz = raiz->iz;
+		resul += sumaClavesImparesDosHijos();
+		raiz = aux;
 	}
-	if (p->iz != NULL)
-		resul += sumaClavesImparesDosHijos(p->iz);
-	if (p->de != NULL)
-		resul += sumaClavesImparesDosHijos(p->de);
-	if (p->clave % 2 == 1 && p->iz != NULL && p->de != NULL)
-		resul += p->clave;
+	if (raiz->de != NULL){
+		raiz = raiz->de;
+		resul += sumaClavesImparesDosHijos();
+		raiz = aux;
+	}
+	if (raiz->clave % 2 == 1 && raiz->iz != NULL && raiz->de != NULL)
+		resul += raiz->clave;
 	return resul;
 }
 
 
-void Arbol::mostrarClavesUnHijo (pNodoArbol p) {
+void Arbol::mostrarClavesUnHijo () {
 	int hijos = 0;
-	if (p == NULL){
-		if (raiz != NULL){
-			p = raiz;
-		}
-		else {
-			return;
-		}
+	pNodoArbol aux;
+	aux = raiz;
+	if (raiz->de != NULL){
+		raiz = raiz->de;
+		mostrarClavesUnHijo();
+		raiz = aux;
 	}
-	if (p->de != NULL){
-		mostrarClavesUnHijo(p->de);
-	}
-	if (p->de != NULL)
+	if (raiz->de != NULL)
 		hijos++;
-	if (p->iz != NULL)
+	if (raiz->iz != NULL)
 		hijos++;
 	if (hijos == 1){
-		cout << p->clave << endl;
+		cout << raiz->clave << endl;
 	}
-	if (p->iz != NULL){
-		mostrarClavesUnHijo(p->iz);
+	if (raiz->iz != NULL){
+		raiz = raiz->iz;
+		mostrarClavesUnHijo();
+		raiz = aux;
 	}
 }

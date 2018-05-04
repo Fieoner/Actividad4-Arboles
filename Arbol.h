@@ -53,8 +53,8 @@ public:
 	void eliminar (int x);
 
 	void rellenarArbol (string f);
-	int sumaClavesImparesDosHijos (pNodoArbol p);
-	void mostrarClavesUnHijo (pNodoArbol p);
+	int sumaClavesImparesDosHijos ();
+	void mostrarClavesUnHijo ();
 };
 
 #endif /* ARBOL_H_ */
