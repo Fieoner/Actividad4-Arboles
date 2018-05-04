@@ -177,9 +177,8 @@ void Arbol::mostrarClavesUnHijo () {
 		raiz = raiz->de;
 		mostrarClavesUnHijo();
 		raiz = aux;
-	}
-	if (raiz->de != NULL)
 		hijos++;
+	}
 	if (raiz->iz != NULL)
 		hijos++;
 	if (hijos == 1){
